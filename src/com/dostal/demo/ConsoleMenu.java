@@ -1,4 +1,4 @@
-package java;
+package com.dostal.demo;
 import java.util.EnumSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;

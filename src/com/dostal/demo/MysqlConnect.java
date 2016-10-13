@@ -1,4 +1,4 @@
-package java;
+package com.dostal.demo;
 import java.security.SecureRandom;
 import java.sql.*;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package java;
+package com.dostal.demo;
 /*
  * Enum of every position in company
  */

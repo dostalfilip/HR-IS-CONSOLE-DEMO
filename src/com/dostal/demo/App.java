@@ -1,4 +1,4 @@
-package java;
+package com.dostal.demo;
 public class App {
 	/*
 	 * Main Application
