@@ -21,21 +21,21 @@ class UtilityClass {
 	}
 
 	 //generate random names
-    static String  generateString(){
-    	final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    	SecureRandom rnd = new SecureRandom();
-    	int size = 16;
+    	static String  generateString(){
+    		final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    		SecureRandom rnd = new SecureRandom();
+    		int size = 16;
 
-    	StringBuilder sb = new StringBuilder( size );
-    	for( int i = 0; i < size ; i++ ) 
-    		sb.append( AB.charAt( rnd.nextInt(AB.length())) 
-    		);
-    	return sb.toString();
+    		StringBuilder sb = new StringBuilder( size );
+    		for( int i = 0; i < size ; i++ ) {
+    			sb.append( AB.charAt( rnd.nextInt(AB.length())));
+		}
+    		return sb.toString();
     	}
       
-    // generate number in interval
-    static int generateInt(int downlimit, int uplimit){
-    	int randomNumber = (int) (downlimit + (Math.random()*(uplimit - downlimit)));
-    	return randomNumber;
-    }
+    	// generate number in interval
+    	static int generateInt(int downlimit, int uplimit){
+    		int randomNumber = (int) (downlimit + (Math.random()*(uplimit - downlimit)));
+    		return randomNumber;
+    	}
 }
