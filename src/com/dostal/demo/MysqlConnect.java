@@ -49,7 +49,7 @@ public class MysqlConnect {
                 System.out.println("Successful Connected.");
             }catch(ClassNotFoundException | SQLException e){
                 e.printStackTrace();
-                System.out.println("Nepodaøilo se pøipojit k databazi ! zkontrolujte mysql databazi a resetujte aplikaci !");
+                System.out.println("NepodaÃ¸ilo se pÃ¸ipojit k databazi ! zkontrolujte mysql databazi a resetujte aplikaci !");
             }
         }
         return connection;
@@ -122,22 +122,22 @@ public class MysqlConnect {
     		e.printStackTrace();
     		return false;
     	}
-    	System.out.println("Záznam pøidán.");
+    	System.out.println("ZÃ¡znam pÃ¸idÃ¡n.");
         return true;
     }
     
     //return the biggist index in id column
     //currently unused
     private int getMax_id(){
-        try {
+    	try {
         	int output = 0;
         	String sql = "SELECT MAX(id) FROM employee;";
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sql);         
-            if(rs.next()){
+          	Statement st = connection.createStatement();
+           	ResultSet rs = st.executeQuery(sql);         
+            	if(rs.next()){
             	output = rs.getInt("MAX(id)");
-            } 
-            return output;
+        	} 
+         	return output;
     	}catch(SQLException e){
     		e.printStackTrace();
         return 0;
@@ -147,12 +147,12 @@ public class MysqlConnect {
     // delete row at position and return true
     public boolean deleteAt_id(int position){
     	try{
-    		 String sql = "select * FROM employee WHERE id = " + position + ";";
-    		 Statement st = connection.createStatement();
-             ResultSet rs = st.executeQuery(sql);
-             if(!rs.next()){
-            	 throw new IllegalArgumentException();
-             }
+    		String sql = "select * FROM employee WHERE id = " + position + ";";
+    		Statement st = connection.createStatement();
+             	ResultSet rs = st.executeQuery(sql);
+             	if(!rs.next()){
+            		throw new IllegalArgumentException();
+             	}
     	}
     	catch(SQLException e){
     		System.out.println("SQLException");
@@ -166,13 +166,13 @@ public class MysqlConnect {
     	try{
     		String sql = "DELETE FROM employee WHERE id = " + position + ";";
     		PreparedStatement st = connection.prepareStatement(sql);
-    	    st.executeUpdate(); 
+    	    	st.executeUpdate(); 
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
     		return false;
     	}
-    	System.out.format("Zaznam %d Smazán.\n",position);
+    	System.out.format("Zaznam %d SmazÃ¡n.\n",position);
         return true;
     }
 
@@ -180,9 +180,9 @@ public class MysqlConnect {
     public boolean showAverageAndCount(){
         try {
             String stm =	"SELECT Position, COUNT(*) AS 'Count of employees', round((avg(Age))) AS 'Average age' " +
-            				"FROM employee " +
-            				"GROUP BY Position " +
-            				"order by COUNT(*) DESC;";
+            			"FROM employee " +
+            			"GROUP BY Position " +
+            			"order by COUNT(*) DESC;";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(stm);
             
@@ -214,31 +214,30 @@ public class MysqlConnect {
 
     // generator of random row in employee
     public boolean generateRow(int count){
-    try{    	  
-    	String id = "null";
-    	for(int i = 0; i < count; i++ ){
-    		String name = utility.generateString();
-    		int age = utility.generateInt(25,60);
-    		Position position = Position.values()[(int)(Math.random()*(Position.values().length))];
+    	try{    	  
+    		String id = "null";
+    		for(int i = 0; i < count; i++ ){
+    			String name = utility.generateString();
+    			int age = utility.generateInt(25,60);
+    			Position position = Position.values()[(int)(Math.random()*(Position.values().length))];
+    				
+    			StringBuilder stm = new StringBuilder();
+    			stm.append("insert into employee values (");
+    			stm.append(id+",'");
+    			stm.append(name+"',");
+    			stm.append(age+",'");
+    			stm.append(position.toString()+"');");
     		
-    		
-    		StringBuilder stm = new StringBuilder();
-    		stm.append("insert into employee values (");
-    		stm.append(id+",'");
-    		stm.append(name+"',");
-    		stm.append(age+",'");
-    		stm.append(position.toString()+"');");
-    		
-    		Statement stmt = connection.createStatement();
-    		stmt.executeUpdate(stm.toString());      		
+    			Statement stmt = connection.createStatement();
+    			stmt.executeUpdate(stm.toString());      		
+    		}
     	}
-	}
-	catch (SQLException e) {
-		e.printStackTrace();
-		return false;
-	}
-    System.out.println("Bylo vygenerováno " + count + " záznamù. ");
-    return true;  	
+    	catch (SQLException e) {
+    		e.printStackTrace();
+    		return false;
+    	}
+    	System.out.println("Bylo vygenerovÃ¡no " + count + " zÃ¡znamÃ¹. ");
+    	return true;  	
     }
     
     /*
