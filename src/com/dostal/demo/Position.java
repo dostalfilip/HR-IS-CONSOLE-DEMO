@@ -9,7 +9,9 @@ public enum Position {
 	SCRUM_MASTER,
 	CEO;
 	
-	
+	/*
+	 *return nonCapital words for better reading
+	 */
 	public String toString(){
 		switch(this){
 			case BACKEND_DEVELOPER:

@@ -54,7 +54,7 @@ public class ConsoleMenu {
         			mysqlConect.showAverageAndCount();
         			break;
         		case "2":
-            			System.out.println("Zadej id ke smazani: ");
+            		System.out.println("Zadej id ke smazani: ");
             			try{	int position = scanner.nextInt();
             				mysqlConect.deleteAt_id(position);            			
             			}catch(InputMismatchException e){
@@ -65,11 +65,11 @@ public class ConsoleMenu {
         			mysqlConect.showAverageAge();
         			break;
         		case "8":
-            			System.out.println("Kolik zaznamu si prejes vygenerovat : ");
+            		System.out.println("Kolik zaznamu si prejes vygenerovat : ");
             			try{
             				int count = scanner.nextInt();
             				if(count<1) throw new InputMismatchException();
-        				mysqlConect.generateRow(count);
+            				mysqlConect.generateRow(count);
             			}catch(InputMismatchException e){
             				System.out.println("Spatna Volba/Zadej pouze kladne cislo.");
             				break;
@@ -78,8 +78,7 @@ public class ConsoleMenu {
         		default:
         			System.out.println("Zadna/Spatna volba.");
         			break;
-        	}
-        	
+        	}        	
         }
         mysqlConect.disconnect();
 	}
@@ -115,8 +114,8 @@ public class ConsoleMenu {
 		
 		System.out.println(output);
 		try{
-		Position value = Position.valueOf(scanner.next().toUpperCase());
-		return value;
+			Position value = Position.valueOf(scanner.next().toUpperCase());
+			return value;
 		}
 		catch(IllegalArgumentException e){
 			System.out.println("Vkladani zruseno ! Vyberte jednu z moznosti, muzete pouzit velka i mala pismena! ");

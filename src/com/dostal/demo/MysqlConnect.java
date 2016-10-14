@@ -1,9 +1,13 @@
 package com.dostal.demo;
-import java.security.SecureRandom;
-import java.sql.*;
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.Properties;
+
 /*
  * Class support all task with database
  */
@@ -31,7 +35,6 @@ public class MysqlConnect {
             properties.setProperty("MaxPooledStatements", MAX_POOL);
             properties.setProperty("useSSL", FALSE);
             properties.setProperty("verifyServerCertificate", FALSE);
-       
         }
         return properties;
     }
@@ -44,7 +47,7 @@ public class MysqlConnect {
                 Class.forName(DATABASE_DRIVER);
                 connection = DriverManager.getConnection(DATABASE_URL, getProperties());
                 System.out.println("Successful Connected.");
-            } catch (ClassNotFoundException | SQLException e) {
+            }catch(ClassNotFoundException | SQLException e){
                 e.printStackTrace();
                 System.out.println("Nepodaøilo se pøipojit k databazi ! zkontrolujte mysql databazi a resetujte aplikaci !");
             }
@@ -59,7 +62,6 @@ public class MysqlConnect {
                 connection.close();
                 connection = null;
                 System.out.println("Disconected.");
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -95,9 +97,7 @@ public class MysqlConnect {
 
                 System.out.println(output);
             }
-
-
-        } catch (SQLException e) {
+        }catch(SQLException e){
             e.printStackTrace();
             return false;
         }
@@ -107,8 +107,6 @@ public class MysqlConnect {
     //add new employee
     public boolean addEmployee(String name, int age, Position position){
     	try{
-
-    		//int id = getMax_id() + 1;   
     		String id = "null";
     		StringBuilder stm = new StringBuilder();
     		stm.append("insert into employee values (");
@@ -121,8 +119,8 @@ public class MysqlConnect {
     		stmt.executeUpdate(stm.toString());  
     	}
     	catch (SQLException e) {
-        e.printStackTrace();
-        return false;
+    		e.printStackTrace();
+    		return false;
     	}
     	System.out.println("Záznam pøidán.");
         return true;
@@ -140,8 +138,8 @@ public class MysqlConnect {
             	output = rs.getInt("MAX(id)");
             } 
             return output;
-    	} catch (SQLException e) {
-        e.printStackTrace();
+    	}catch(SQLException e){
+    		e.printStackTrace();
         return 0;
     	}
     }
@@ -149,7 +147,6 @@ public class MysqlConnect {
     // delete row at position and return true
     public boolean deleteAt_id(int position){
     	try{
- 
     		 String sql = "select * FROM employee WHERE id = " + position + ";";
     		 Statement st = connection.createStatement();
              ResultSet rs = st.executeQuery(sql);
@@ -157,7 +154,7 @@ public class MysqlConnect {
             	 throw new IllegalArgumentException();
              }
     	}
-    	catch (SQLException e) {
+    	catch(SQLException e){
     		System.out.println("SQLException");
     		return false;
     	}
@@ -172,8 +169,8 @@ public class MysqlConnect {
     	    st.executeUpdate(); 
     	}
     	catch (SQLException e) {
-        e.printStackTrace();
-        return false;
+    		e.printStackTrace();
+    		return false;
     	}
     	System.out.format("Zaznam %d Smazán.\n",position);
         return true;
@@ -208,14 +205,11 @@ public class MysqlConnect {
 
                 System.out.println(output);
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
-        return true;
-    
+        return true;   
     }
 
     // generator of random row in employee
@@ -240,20 +234,21 @@ public class MysqlConnect {
     	}
 	}
 	catch (SQLException e) {
-    e.printStackTrace();
-    return false;
+		e.printStackTrace();
+		return false;
 	}
     System.out.println("Bylo vygenerováno " + count + " záznamù. ");
-    return true;
-    	
+    return true;  	
     }
     
+    /*
+     * method print statistic table
+     */
     public boolean showAverageAge(){
     	System.out.format("+-------------------------------------------------------------+%n");
     	System.out.format("|   Age   |                 Count of employees                |%n");
     	System.out.format("+-------------------------------------------------------------+%n");
-
-    	
+   	
     	try {
     		LinkedHashMap<String,String> stm = new LinkedHashMap<String,String>();
     		stm.put("<20","select count(*) AS 'Count of employees'  from employee where Age < 20;");
@@ -262,27 +257,23 @@ public class MysqlConnect {
     		stm.put("60+", "select count(*) AS 'Count of employees'  from employee where Age > 60;");
            
     		for(String key : stm.keySet()){
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(stm.get(key));     
-            if(rs.next()){
-            	String output = "    ";
-            	String age = key;
-            	int count = rs.getInt("Count of employees");
-            	output += age;
-            	output = utility.checkLenght(output, 35);
-            	output += count;
+    			Statement st = connection.createStatement();
+    			ResultSet rs = st.executeQuery(stm.get(key));     
+    			if(rs.next()){
+    				String output = "    ";
+    				String age = key;
+    				int count = rs.getInt("Count of employees");
+    				output += age;
+    				output = utility.checkLenght(output, 35);
+    				output += count;
             	
-            	System.out.println(output);            	
+    				System.out.println(output);            	
+    			}
             }
-            
-            }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
-    
-  }
+}

@@ -16,8 +16,7 @@ class UtilityClass {
 		sb.append(input);
 		while(sb.length() < totalLenght){
 			sb.append(" ");
-		}
-		
+		}	
 		return sb.toString();
 	}
 
@@ -33,12 +32,10 @@ class UtilityClass {
     		);
     	return sb.toString();
     	}
-    
-    
+      
     // generate number in interval
     static int generateInt(int downlimit, int uplimit){
     	int randomNumber = (int) (downlimit + (Math.random()*(uplimit - downlimit)));
     	return randomNumber;
     }
-
 }
