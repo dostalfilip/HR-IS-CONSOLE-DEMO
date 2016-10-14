@@ -49,7 +49,7 @@ public class MysqlConnect {
                 System.out.println("Successful Connected.");
             }catch(ClassNotFoundException | SQLException e){
                 e.printStackTrace();
-                System.out.println("Nepodaøilo se pøipojit k databazi ! zkontrolujte mysql databazi a resetujte aplikaci !");
+                System.out.println("Nepodarilo se pripojit k databazi ! zkontrolujte mysql databazi a resetujte aplikaci !");
             }
         }
         return connection;
@@ -122,7 +122,7 @@ public class MysqlConnect {
     		e.printStackTrace();
     		return false;
     	}
-    	System.out.println("Záznam pøidán.");
+    	System.out.println("Zaznam pridan.");
         return true;
     }
     
@@ -172,7 +172,7 @@ public class MysqlConnect {
     		e.printStackTrace();
     		return false;
     	}
-    	System.out.format("Zaznam %d Smazán.\n",position);
+    	System.out.format("Zaznam %d Smazan.\n",position);
         return true;
     }
 
@@ -236,7 +236,7 @@ public class MysqlConnect {
     		e.printStackTrace();
     		return false;
     	}
-    	System.out.println("Bylo vygenerováno " + count + " záznamù. ");
+    	System.out.println("Bylo vygenerovano " + count + " zaznamu. ");
     	return true;  	
     }
     
