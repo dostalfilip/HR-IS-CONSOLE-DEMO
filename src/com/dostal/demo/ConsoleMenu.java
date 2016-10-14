@@ -41,42 +41,39 @@ public class ConsoleMenu {
         			}
         			Position position =setPosition(scanner);      
         			if(position == null) break;
-        			mysqlConect.addEmployee(name, age, position);
+        				mysqlConect.addEmployee(name, age, position);
         			}
         			catch(InputMismatchException e){
         				e.printStackTrace();
         			}
         			catch(IllegalArgumentException e){
         				System.out.println("Vkladani zruseno! Vek nesmi byt mensi nez 10 a vetsi nez 100!");
-
         			}
         			break;
         		case "3":
         			mysqlConect.showAverageAndCount();
         			break;
         		case "2":
-            		System.out.println("Zadej id ke smazani: ");
-            		try{
-            			int position = scanner.nextInt();
-            			mysqlConect.deleteAt_id(position);            			
-            		}catch(InputMismatchException e){
-            			System.out.println("Mazani zruseno / spatna volba!");
-            		}
-            
+            			System.out.println("Zadej id ke smazani: ");
+            			try{	int position = scanner.nextInt();
+            				mysqlConect.deleteAt_id(position);            			
+            			}catch(InputMismatchException e){
+            				System.out.println("Mazani zruseno / spatna volba!");
+            			}
         			break;
         		case "4":
         			mysqlConect.showAverageAge();
         			break;
         		case "8":
-            		System.out.println("Kolik zaznamu si prejes vygenerovat : ");
-            		try{
-            		int count = scanner.nextInt();
-            		if(count<1) throw new InputMismatchException();
-        			mysqlConect.generateRow(count);
-            		}catch(InputMismatchException e){
-            			System.out.println("Spatna Volba/Zadej pouze kladne cislo.");
-            			break;
-            		}
+            			System.out.println("Kolik zaznamu si prejes vygenerovat : ");
+            			try{
+            				int count = scanner.nextInt();
+            				if(count<1) throw new InputMismatchException();
+        				mysqlConect.generateRow(count);
+            			}catch(InputMismatchException e){
+            				System.out.println("Spatna Volba/Zadej pouze kladne cislo.");
+            				break;
+            			}
         			break;
         		default:
         			System.out.println("Zadna/Spatna volba.");
