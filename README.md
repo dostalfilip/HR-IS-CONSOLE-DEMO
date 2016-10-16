@@ -3,8 +3,11 @@ HR Information System CONSOLE DEMO
 Used Technology
 
 IDE: Eclipse Mars.1 (4.5.1)
+
 JDK: 1.8.0_92
+
 JDBC driver for MySQL: mysql-connector-java-5.1.40-bin
+
 MySQL Server 5.7.16
 
 How Setup Project
